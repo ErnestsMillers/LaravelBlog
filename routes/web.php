@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// User Routes
+
+// Admin Routes
+Route::resource('/admin/posts', 'Admin\AdminPostsController', ['as' => 'admin']);
+Route::resource('/admin/categories', 'Admin\AdminCategoriesController', ['as' => 'admin']);
+
+
+
+// Auth
+Auth::routes();
