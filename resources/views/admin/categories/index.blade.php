@@ -20,7 +20,6 @@
                     		<th>ID</th>
                     		<th>Name</th>
                     		<th>Description</th>
-                            <th>Category</th>
                     		<th>Created At</th>
                     		<th>Updated At</th>
                     		<th>Actions</th>
@@ -29,9 +28,8 @@
                     		@foreach($categories as $category)
 								<tr>
 									<td>{{ $category->id }}</td>
-									<td>{{ $category->name }}</td>
-                                    <td>{{ $category->description }}</td>
-									<td>{{ $category->category }}</td>
+									<td>{{ substr($category->name, 0, 10) }}</td>
+									<td>{{ substr($category->description, 0, 10) }}</td>
 									<td>{{ $category->created_at }}</td>
 									<td>{{ $category->updated_at }}</td>
 									<td>

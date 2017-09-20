@@ -12,6 +12,10 @@
 */
 
 // User Routes
+Route::resource('/blog', 'Guest\GuestPostsController', ['as'     => 'guest', 
+														'except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+
+
 
 // Admin Routes
 Route::resource('/admin/posts', 'Admin\AdminPostsController', ['as' => 'admin']);

@@ -10,6 +10,11 @@ use App\Tag;
 
 class AdminTagsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -102,7 +107,7 @@ class AdminTagsController extends Controller
         $tag = Tag::find($id);
         $tag->posts()->detach();
         $tag->delete();
-        
+
         Session::flash('success', 'Tag was deleted!');
         return redirect()->route('admin.tags.index');
     }

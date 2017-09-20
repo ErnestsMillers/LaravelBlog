@@ -9,8 +9,6 @@
                 
                 <div class="panel-body">
 
-                	{{ $category->posts->title }}
-
 					<!-- UPDATE -->
 
 					{!! Form::open(['route' => ['admin.categories.update', $category->id], 'method' => 'POST']) !!}

@@ -16,7 +16,7 @@
 
 				@if (Auth::check())
 					<li><a href="{{ route('admin.posts.index') }}">Posts Admin</a></li>
-					<li><a href="#">Posts Guest</a></li>
+					<li><a href="{{ route('guest.blog.index') }}">Posts Guest</a></li>
 					<li><a href="#">|</a></li>
 					<li><a href="{{ route('admin.categories.index') }}">Categories Admin</a></li>
 					<li><a href="#">Categories Guest</a></li>
@@ -30,7 +30,7 @@
 					<li><a href="#">|</a></li>
 					<li><a href="#">Search Guest</a></li>
 				@else
-					<li><a href="#">Home</a></li>
+					<li><a href="{{ route('guest.blog.index') }}">Home</a></li>
 					<li><a href="#">Categories</a></li>
 					<li><a href="#">Tags</a></li>
 					<li><a href="#">Archive</a></li>
