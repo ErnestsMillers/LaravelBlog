@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Category;
 use Session;
 
 class AdminPostsController extends Controller
@@ -27,7 +28,8 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+        return view('admin.posts.create')->with('categories', $categories);
     }
 
     /**
@@ -40,8 +42,9 @@ class AdminPostsController extends Controller
     {
         // Validate
         $this->validate($request, array(
-            'title'          => 'required|max:255',
-            'body'           => 'required',
+            'title'       => 'required|max:255',
+            'body'        => 'required',
+            'category_id' => 'required',
         ));
 
         // Assign request to the new Post object
@@ -49,6 +52,7 @@ class AdminPostsController extends Controller
 
         $post->title = $request->title;
         $post->body  = $request->body;
+        $post->category_id  = $request->category_id;
 
         $post->save();
 
@@ -56,7 +60,7 @@ class AdminPostsController extends Controller
         Session::flash('success', 'The blog post was successfully saved!');
 
         // reditect to inserted post
-        return redirect()->route('posts.show', $post->id);
+        return redirect()->route('admin.posts.show', $post->id);
     }
 
     /**
@@ -94,14 +98,14 @@ class AdminPostsController extends Controller
     {
         // Validate
         $this->validate($request, array(
-            'title'          => 'required|max:255',
-            'body'           => 'required',
+            'title' => 'required|max:255',
+            'body'  => 'required',
         ));
 
         $post = Post::find($id);
 
         $post->title = $request->title;
-        $post->body = $request->body;
+        $post->body  = $request->body;
 
         $post->save();
 

@@ -15,9 +15,11 @@
 
 // Admin Routes
 Route::resource('/admin/posts', 'Admin\AdminPostsController', ['as' => 'admin']);
-Route::resource('/admin/categories', 'Admin\AdminCategoriesController', ['as' => 'admin']);
 
+Route::resource('/admin/categories', 'Admin\AdminCategoriesController', ['as'     => 'admin', 
+																		 'except' => 'show']);
 
+ 
 
 // Auth
 Auth::routes();

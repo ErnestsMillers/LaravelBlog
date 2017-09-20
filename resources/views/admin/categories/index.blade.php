@@ -10,34 +10,32 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
-                	<div class="pull-left" style="line-height: 30px">Posts</div>
-					<a href="{{ route('admin.posts.create') }}" class="btn btn-success btn-sm pull-right">Create Post</a>
+                    <div class="pull-left" style="line-height: 30px">Categories</div>
+                    <a href="{{ route('admin.posts.create') }}" class="btn btn-success btn-sm pull-right">Create Category</a>
                 </div>
 
                 <div class="panel-body">
                     <table class="table datatables">
                     	<thead>
                     		<th>ID</th>
-                    		<th>Title</th>
-                    		<th>Body</th>
-                    		<th>Category</th>
+                    		<th>Name</th>
+                    		<th>Description</th>
+                            <th>Category</th>
                     		<th>Created At</th>
                     		<th>Updated At</th>
                     		<th>Actions</th>
                     	</thead>
-
                     	<tbody>
-                    		@foreach($posts as $post)
+                    		@foreach($categories as $category)
 								<tr>
-									<td>{{ $post->id }}</td>
-									<td>{{ $post->title }}</td>
-									<td>{{ $post->body }}</td>
-									<td>{{ $post->category->name }}</td>
-									<td>{{ $post->created_at }}</td>
-									<td>{{ $post->updated_at }}</td>
+									<td>{{ $category->id }}</td>
+									<td>{{ $category->name }}</td>
+                                    <td>{{ $category->description }}</td>
+									<td>{{ $category->category }}</td>
+									<td>{{ $category->created_at }}</td>
+									<td>{{ $category->updated_at }}</td>
 									<td>
-										<a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-default btn-sm btn-block">Show</a>
-										<a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-default btn-sm btn-block">Edit</a>
+										<a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-default btn-sm btn-block">Edit</a>
 									</td>
 								</tr>
                     		@endforeach

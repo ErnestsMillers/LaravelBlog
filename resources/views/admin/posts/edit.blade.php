@@ -6,8 +6,11 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
                 <div class="panel-heading">Update This Post</div>
-                
+
                 <div class="panel-body">
+
+					<!-- UPDATE -->
+
 					{!! Form::open(['route' => ['admin.posts.update', $post->id], 'method' => 'POST']) !!}
 						{{ Form::hidden('_method', 'PUT') }}
 
@@ -22,6 +25,8 @@
 		    			{{ Form::submit('Update Post', ['class' => 'btn btn-success btn-lg btn-block', 
 		    												 'style' => 'margin-top: 20px']) }}
 					{!! Form::close() !!}
+
+					<!-- DELETE -->
 
 					{!! Form::open(['route' => ['admin.posts.destroy', $post->id], 'method' => 'POST']) !!}
 						{{ Form::hidden('_method', 'DELETE') }}

@@ -6,7 +6,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
                 <div class="panel-heading">Create New Post</div>
-                
+
                 <div class="panel-body">
 					{!! Form::open(['route' => 'admin.posts.store']) !!}
 
@@ -17,6 +17,15 @@
 
 		    			{{ Form::label('body', 'Post Body:') }}
 		    			{{ Form::textarea('body', null, array('class'    => 'form-control')) }}
+
+		    			{{ Form::label('category_id', 'Category:') }}
+						<select name="category_id" class="form-control">
+							
+							@foreach ($categories as $category)
+								<option value="{{ $category->id }}">{{ $category->name }}</option>
+							@endforeach
+
+						</select>
 		    												  
 		    			{{ Form::submit('Create Post', array('class' => 'btn btn-success btn-lg btn-block', 
 		    												 'style' => 'margin-top: 20px')) }}

@@ -18,16 +18,25 @@
 					<li><a href="{{ route('admin.posts.index') }}">Posts Admin</a></li>
 					<li><a href="#">Posts Guest</a></li>
 					<li><a href="#">|</a></li>
-					<li><a href="#">Categories Admin</a></li>
+					<li><a href="{{ route('admin.categories.index') }}">Categories Admin</a></li>
 					<li><a href="#">Categories Guest</a></li>
 					<li><a href="#">|</a></li>
 					<li><a href="#">Tags Admin</a></li>
 					<li><a href="#">Tags Guest</a></li>
+					<li><a href="#">|</a></li>
+					<li><a href="#">Comments Admin</a></li>
+					<li><a href="#">|</a></li>
+					<li><a href="#">Archive Guest</a></li>
+					<li><a href="#">|</a></li>
+					<li><a href="#">Search Guest</a></li>
 				@else
 					<li><a href="#">Home</a></li>
 					<li><a href="#">Categories</a></li>
 					<li><a href="#">Tags</a></li>
+					<li><a href="#">Archive</a></li>
+					<li><a href="#">Search</a></li>
 				@endif
+
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->

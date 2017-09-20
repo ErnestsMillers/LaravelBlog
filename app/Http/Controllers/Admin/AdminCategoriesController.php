@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Session;
+use App\Category;
 
 class AdminCategoriesController extends Controller
 {
@@ -13,7 +16,8 @@ class AdminCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('admin.categories.index')->with('categories', $categories);
     }
 
     /**
@@ -23,7 +27,7 @@ class AdminCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -34,18 +38,25 @@ class AdminCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Validate
+        $this->validate($request, array(
+            'name'        => 'required|max:255',
+            'description' => 'required',
+        ));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        // Assign request to the new Post object
+        $category = new Category;
+
+        $category->name        = $request->name;
+        $category->description = $request->description;
+
+        $category->save();
+
+        // show a successful message
+        Session::flash('success', 'Category was successfully added!');
+
+        // reditect to inserted post
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -56,7 +67,8 @@ class AdminCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('admin.categories.edit')->with('category', $category);
     }
 
     /**
@@ -68,7 +80,22 @@ class AdminCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate
+        $this->validate($request, array(
+            'name'        => 'required|max:255',
+            'description' => 'required',
+        ));
+
+        $category = Category::find($id);
+
+        $category->name        = $request->name;
+        $category->description = $request->description;
+
+        $category->save();
+
+        Session::flash('success', 'Category was successfully updated!');
+
+        return redirect()->route('admin.categories.index', $category->id);
     }
 
     /**
@@ -79,6 +106,8 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return redirect()->route('admin.categories.index');
     }
 }
