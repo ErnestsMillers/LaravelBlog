@@ -26,6 +26,15 @@
 							@endforeach
 
 						</select>
+
+						{{ Form::label('tags', 'Tags:') }}
+						<select name="tags[]" class="form-control select2-multi" multiple="multiple">
+							
+							@foreach ($tags as $tag)
+								<option value="{{ $tag->id }}">{{ $tag->title }}</option>
+							@endforeach
+
+						</select>
 		    												  
 		    			{{ Form::submit('Create Post', array('class' => 'btn btn-success btn-lg btn-block', 
 		    												 'style' => 'margin-top: 20px')) }}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use App\Category;
 use Session;
 
@@ -29,7 +30,9 @@ class AdminPostsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create')->with('categories', $categories);
+        $tags = Tag::all();
+
+        return view('admin.posts.create')->with('categories', $categories)->with('tags', $tags);
     }
 
     /**
@@ -55,6 +58,8 @@ class AdminPostsController extends Controller
         $post->category_id  = $request->category_id;
 
         $post->save();
+
+        $post->tags()->sync($request->tags, false);
 
         // show a successful message
         Session::flash('success', 'The blog post was successfully saved!');
@@ -83,8 +88,10 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
-        return view('admin.posts.edit')->with('post', $post);
+        $post       = Post::find($id);
+        $categories = Category::all();
+        $tags       = Tag::all();
+        return view('admin.posts.edit')->with('post', $post)->with('categories', $categories)->with('tags', $tags);
     }
 
     /**
@@ -100,14 +107,24 @@ class AdminPostsController extends Controller
         $this->validate($request, array(
             'title' => 'required|max:255',
             'body'  => 'required',
+            'category_id' => 'required',
         ));
 
         $post = Post::find($id);
 
         $post->title = $request->title;
         $post->body  = $request->body;
+        $post->category_id  = $request->category_id;
 
         $post->save();
+
+        // Save the tags
+        if (isset($request->tags))
+        {
+            $post->tags()->sync($request->tags);
+        } else {
+            $post->tags()->sync(array());
+        }
 
         Session::flash('success', 'The blog post was successfully updated!');
 
@@ -123,6 +140,7 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $post->tags->detach();
         $post->delete();
         return redirect()->route('admin.posts.index');
     }

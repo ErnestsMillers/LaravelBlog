@@ -21,7 +21,7 @@
 					<li><a href="{{ route('admin.categories.index') }}">Categories Admin</a></li>
 					<li><a href="#">Categories Guest</a></li>
 					<li><a href="#">|</a></li>
-					<li><a href="#">Tags Admin</a></li>
+					<li><a href="{{ route('admin.tags.index') }}">Tags Admin</a></li>
 					<li><a href="#">Tags Guest</a></li>
 					<li><a href="#">|</a></li>
 					<li><a href="#">Comments Admin</a></li>
